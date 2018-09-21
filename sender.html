@@ -31,7 +31,8 @@
                 type: 'POST',
                 url: 'http://talkingarage.bishalsarker.com/home/sender',
                 data: { lan: position.coords.latitude, lon: position.coords.longitude},
-                dataType: 'json',
+                crossDomain: true,
+                dataType: 'jsonp',
                 success: function (data) {
                     setTimeout(msg, 3000);
                 }
