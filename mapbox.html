@@ -87,7 +87,21 @@ function showPosition(position) {
     }  
     */
     map.jumpTo({'center': [position.coords.longitude, position.coords.latitude]});
-    
+    map.getSource('mypoint').setData({
+                "type": "FeatureCollection",
+                "features": [
+		                {
+		                    "type": "Feature",
+		                    "geometry": {
+		                        "type": "Point",
+		                        "coordinates": [position.coords.longitude, position.coords.latitude]
+		                    },
+		                    "properties": {
+		                        "icon": "circle"
+		                    }
+		                }
+                	]
+               });
 }
 
 function showError(error) {
