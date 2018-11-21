@@ -24,6 +24,7 @@
 <div id='map'></div>
 
 <script>
+var pNum = 0;
 var jumped = false;
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmlzaGFsc2Fya2VyIiwiYSI6ImNqbzZqbTY3bjA1MnMzcG9qNDQzZWQ2aGMifQ._DQe2FjiGILKw00cndvFqQ';
 const map = new mapboxgl.Map({
@@ -56,9 +57,8 @@ function showPosition(position) {
     }  
     */
     map.jumpTo({'center': [position.coords.longitude, position.coords.latitude]});
-    map.on('load', function () {
-	    map.addLayer({
-	        "id": "mypoint",
+    map.addLayer({
+	        "id": "mypoint" + pNum,
 	        "type": "symbol",
 	        "source": {
 	            "type": "geojson",
@@ -84,7 +84,7 @@ function showPosition(position) {
 	            "text-anchor": "top"
 	        }
 	    });
-});
+	pNum++;
 }
 
 function showError(error) {
