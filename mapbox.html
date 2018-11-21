@@ -30,7 +30,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYmlzaGFsc2Fya2VyIiwiYSI6ImNqbzZqbTY3bjA1MnMzc
 const map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/bishalsarker/cjo6tzog00u4p2st4qykbiqt5',
-center: [90.377874, 23.752968],
+center: [0, 0],
 zoom: i
 });
 
@@ -42,6 +42,7 @@ getLocation();
 
 function getLocation() {
     if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPositionPosition(showPosition, showError);
         navigator.geolocation.watchPosition(showPosition, showError);
     } else { 
         alert("Geolocation is not supported by this browser.");
