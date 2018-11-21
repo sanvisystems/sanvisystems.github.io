@@ -89,7 +89,7 @@ function showPosition(position) {
     map.jumpTo({'center': [position.coords.longitude, position.coords.latitude]});
     corData.features[0].geometry.coordinates = [position.coords.longitude, position.coords.latitude];
 	console.log(corData);
-    //map.getSource('mypoint').setData(corData);
+    map.getSource('mypoint').setData(corData);
 }
 
 function showError(error) {
