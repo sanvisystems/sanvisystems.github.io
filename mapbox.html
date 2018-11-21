@@ -49,10 +49,13 @@ function getLocation() {
 }
 
 function showPosition(position) {
+    /*
     if(jumped != true){
 	map.jumpTo({'center': [position.coords.longitude, position.coords.latitude]});
 	jumped = true;
     }  
+    */
+    map.jumpTo({'center': [position.coords.longitude, position.coords.latitude]});
     map.on('load', function () {
 	    map.addLayer({
 	        "id": "mypoint",
