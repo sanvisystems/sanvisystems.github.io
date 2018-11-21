@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>Display a map</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
+</head>
+<body>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.css' type='text/css' />
+<div id='map'></div>
+
+<script>
+var i = 15;
+var x = document.getElementById("map");
+var lat = 0.00;
+var lon = 0.00;
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiYmlzaGFsc2Fya2VyIiwiYSI6ImNqbzZqbTY3bjA1MnMzcG9qNDQzZWQ2aGMifQ._DQe2FjiGILKw00cndvFqQ';
+const map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/bishalsarker/cjo6tzog00u4p2st4qykbiqt5',
+center: [90.377874, 23.752968],
+zoom: i
+});
+
+var nav = new mapboxgl.NavigationControl();
+map.addControl(nav, 'top-right');
+
+getLocation();	
+
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(showPosition, showError);
+    } else { 
+        console.log("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
+
+    map.jumpTo({'center': [position.coords.longitude, position.coords.latitude], 'zoom': i});
+    map.on('load', function () {
+	    map.addLayer({
+	        "id": "points",
+	        "type": "symbol",
+	        "source": {
+	            "type": "geojson",
+	            "data": {
+	                "type": "FeatureCollection",
+	                "features": [{
+	                    "type": "Feature",
+	                    "geometry": {
+	                        "type": "Point",
+	                        "coordinates": [position.coords.longitude, position.coords.latitude]
+	                    },
+	                    "properties": {
+	                        "icon": "circle",
+	                    }
+	                }]
+	            }
+	        },
+	        "layout": {
+	            "icon-image": "{icon}-15",
+	            "text-field": "{title}",
+	            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+	            "text-offset": [0, 0.6],
+	            "text-anchor": "top"
+	        }
+	    });
+});
+	console.log(lat + ", " + lon);
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            console.log("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            console.log("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            console.log("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            console.log("An unknown error occurred.");
+            break;
+	}
+}
+
+</script>
+
+</body>
+</html>
