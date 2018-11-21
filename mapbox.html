@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>Talking Garage | Test Map</title>
+  <title>Display a map</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
   <script type="text/javascript">
@@ -38,17 +38,19 @@ map.addControl(nav, 'top-right');
 
 var corData = {
                 "type": "FeatureCollection",
-                "features": [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [0, 0]
-                    },
-                    "properties": {
-                        "icon": "circle",
-                    }
-                }]
-              };
+                "features": [
+		                {
+		                    "type": "Feature",
+		                    "geometry": {
+		                        "type": "Point",
+		                        "coordinates": [0, 0]
+		                    },
+		                    "properties": {
+		                        "icon": "circle",
+		                    }
+		                }
+                	]
+               };
 
 map.on('load', function () {
     map.addSource('mypoint', { type: 'geojson', data: corData });
