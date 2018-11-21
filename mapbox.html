@@ -36,7 +36,8 @@ zoom: 16
 var nav = new mapboxgl.NavigationControl();
 map.addControl(nav, 'top-right');
 
-var corData = {
+map.on('load', function () {
+    map.addSource('mypoint', { type: 'geojson', data: {
                 "type": "FeatureCollection",
                 "features": [
 		                {
@@ -50,10 +51,9 @@ var corData = {
 		                    }
 		                }
                 	]
-               };
+               } 
+           });
 
-map.on('load', function () {
-    map.addSource('mypoint', { type: 'geojson', data: corData });
     map.addLayer({
         "id": "mypoint",
         "type": "symbol",
@@ -87,9 +87,21 @@ function showPosition(position) {
     }  
     */
     map.jumpTo({'center': [position.coords.longitude, position.coords.latitude]});
-    corData.features[0].geometry.coordinates = [position.coords.longitude, position.coords.latitude];
-	console.log(corData);
-    map.getSource('mypoint').setData(corData);
+    map.getSource('mypoint').setData({
+                "type": "FeatureCollection",
+                "features": [
+		                {
+		                    "type": "Feature",
+		                    "geometry": {
+		                        "type": "Point",
+		                        "coordinates": [position.coords.longitude, position.coords.latitude];
+		                    },
+		                    "properties": {
+		                        "icon": "circle",
+		                    }
+		                }
+                	]
+               });
 }
 
 function showError(error) {
