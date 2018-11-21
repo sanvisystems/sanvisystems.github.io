@@ -21,10 +21,6 @@
 <div id='map'></div>
 
 <script>
-var i = 15;
-var lat = 0.00;
-var lon = 0.00;
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiYmlzaGFsc2Fya2VyIiwiYSI6ImNqbzZqbTY3bjA1MnMzcG9qNDQzZWQ2aGMifQ._DQe2FjiGILKw00cndvFqQ';
 const map = new mapboxgl.Map({
 container: 'map',
@@ -49,9 +45,6 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    lat = position.coords.latitude;
-    lon = position.coords.longitude;
-
     map.jumpTo({'center': [position.coords.longitude, position.coords.latitude]});
     map.on('load', function () {
 	    map.addLayer({
