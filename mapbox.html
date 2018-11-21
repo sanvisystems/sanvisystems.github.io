@@ -22,7 +22,6 @@
 
 <script>
 var i = 15;
-var x = document.getElementById("map");
 var lat = 0.00;
 var lon = 0.00;
 
@@ -31,7 +30,7 @@ const map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/bishalsarker/cjo6tzog00u4p2st4qykbiqt5',
 center: [0, 0],
-zoom: 3
+zoom: 13
 });
 
 var nav = new mapboxgl.NavigationControl();
@@ -43,7 +42,7 @@ getLocation();
 function getLocation() {
     if (navigator.geolocation) {
         //navigator.geolocation.getCurrentPositionPosition(showPosition, showError);
-        navigator.geolocation.watchPosition(showPosition, showError, {enableHighAccuracy: true});
+        navigator.geolocation.watchPosition(showPosition, showError);
     } else { 
         alert("Geolocation is not supported by this browser.");
     }
@@ -53,7 +52,7 @@ function showPosition(position) {
     lat = position.coords.latitude;
     lon = position.coords.longitude;
 
-    map.jumpTo({'center': [position.coords.longitude, position.coords.latitude], 'zoom': i});
+    map.jumpTo({'center': [position.coords.longitude, position.coords.latitude]});
     map.on('load', function () {
 	    map.addLayer({
 	        "id": "mypoint",
@@ -83,6 +82,7 @@ function showPosition(position) {
 	        }
 	    });
 });
+	alert(lat + ", " + lon);
 }
 
 function showError(error) {
