@@ -42,7 +42,7 @@ getLocation();
 
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(showPosition, showError, {enableHighAccuracy: true, maximumAge: 1000});
+        navigator.geolocation.watchPosition(showPosition, showError, {enableHighAccuracy: true, maximumAge: 10000});
     } else { 
         alert("Geolocation is not supported by this browser.");
     }
