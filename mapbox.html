@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>Talking Garage | Test Map</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+  <script type="text/javascript">
+	//mapbox://styles/bishalsarker/cjo6tzog00u4p2st4qykbiqt5
+  </script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
+  <style>
+		* {
+		  box-sizing: border-box;
+		  margin: 0;
+		  padding: 0;
+		}
+		html, body {  
+		  height: 100%;
+		  width: 100%;
+		}
+		#map, #infoContainer {
+		  width: 100%;
+		}
+		#infoContainer {
+		  height: 30%;
+		  background-color: #36454f;
+		}
+		#map {
+		  height: 70%;
+		}
+
+		.marker {
+			background-image: url('marker-editor.svg');
+			background-size: cover;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+		.places{
+			padding-top: 15px;
+			padding-bottom: 15px;
+			padding-left: 10px;
+		}
+
+		@media screen and (min-width: 480px) {
+			#map, #infoContainer {
+			display: inline-block;
+			}
+			#infoContainer {
+			height: 100%;
+			width: 30%;
+			padding: 1em 0 1em 0;
+			}
+			#map {
+			float: right;
+			height: 100%;
+			width: 70%;
+			}
+		}
+
+		@media screen and (max-width: 660px) {
+			.map, .sidebar {
+			height: 50%;
+			width: 100%;
+			}
+			.map {
+			top: 0;
+			bottom: 50%;
+			left: 0;
+			}
+			.sidebar {
+			top: 50%;
+			bottom: 100%;
+			}
+		}
+  </style>
+  <script>
+  	var geojson = {
+  		type: 'FeatureCollection',
+	    features: [{
+		    type: 'Feature',
+		    geometry: {
+		      type: 'Point',
+		      coordinates: [90.012586, 23.859526]
+		    },
+		    properties: {
+		      title: 'Asha Tower',
+		      description: ''
+		    }
+		  },
+		  {
+		    type: 'Feature',
+		    geometry: {
+		      type: 'Point',
+		      coordinates: [90.011249, 23.859480]
+		    },
+		    properties: {
+		      title: 'Motaleb Tower',
+		      description: ''
+		    }
+		  },
+		  {
+		    type: 'Feature',
+		    geometry: {
+		      type: 'Point',
+		      coordinates: [90.007640, 23.859672]
+		    },
+		    properties: {
+		      title: 'Mokimpurvilla',
+		      description: ''
+		    }
+		  },
+		  {
+		    type: 'Feature',
+		    geometry: {
+		      type: 'Point',
+		      coordinates: [90.008194, 23.860390]
+		    },
+		    properties: {
+		      title: 'Gangadharpotti Tower',
+		      description: ''
+		    }
+		  },
+		  {
+		    type: 'Feature',
+		    geometry: {
+		      type: 'Point',
+		      coordinates: [90.379049, 23.751969]
+		    },
+		    properties: {
+		      title: 'DIU DT4',
+		      description: ''
+		    }
+		  },
+		  {
+		    type: 'Feature',
+		    geometry: {
+		      type: 'Point',
+		      coordinates: [90.377872, 23.753999]
+		    },
+		    properties: {
+		      title: 'DIU DT5',
+		      description: ''
+		    }
+		  },
+		  {
+		    type: 'Feature',
+		    geometry: {
+		      type: 'Point',
+		      coordinates: [90.361876, 23.757552]
+		    },
+		    properties: {
+		      title: 'Mohammadpur Bustand',
+		      description: ''
+		    }
+		  }]
+	};
+
+	var place1 = {
+		    type: 'Feature',
+		    geometry: {
+		      type: 'Point',
+		      coordinates: [90.001787, 23.870762]
+		    },
+		    properties: {
+		      title: 'Terminal Ground',
+		      description: ''
+		    }
+    };
+    var place2 = {
+		    type: 'Feature',
+		    geometry: {
+		      type: 'Point',
+		      coordinates: [90.001970, 23.860154]
+		    },
+		    properties: {
+		      title: 'Shishu Park',
+		      description: ''
+	       }
+	};
+
+	geojson.features.push(place1);
+	geojson.features.push(place2);
+
+  </script>
+</head>
+<body>
+
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.css' type='text/css' />
+<div id='map'></div>
+<div id='infoContainer'>
+	<p style="color: white; padding: 10px;"><b>Parking-lots near you: </b></p>
+	<div id='info' style="color: white;"></div>
+</div>
+<script src='map.js'></script>
+</body>
+</html>
